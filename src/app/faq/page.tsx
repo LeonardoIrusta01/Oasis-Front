@@ -1,3 +1,4 @@
+"use client"
 const faq = () => {
     return(
         <div>FaQ</div>

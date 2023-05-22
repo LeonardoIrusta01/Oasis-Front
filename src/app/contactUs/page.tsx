@@ -1,3 +1,4 @@
+"use client"
 const contactUs = () => {
     return(
         <div>Contact Us</div>
