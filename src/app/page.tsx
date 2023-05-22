@@ -1,7 +1,12 @@
+"use client"
 const home = () => {
-  return(
-      <div>Home</div>
-  )
-}
+	return (
 
-export default home
+    <div>
+			<div>Home</div>
+    </div>
+
+	);
+};
+
+export default home;

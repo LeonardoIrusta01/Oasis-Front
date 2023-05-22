@@ -1,3 +1,4 @@
+"use client"
 const signUp = () => {
     return(
         <div>Sign Up</div>
