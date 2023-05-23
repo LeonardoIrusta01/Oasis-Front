@@ -1,4 +1,5 @@
 "use client"
+import ProductCard from "@/components/productCard";
 const home = () => {
 	return (
 
