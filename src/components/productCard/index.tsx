@@ -1,7 +1,9 @@
+import React from 'react';
+import cardProps from '@/types/cardInterface';
 import Image from 'next/image';
 import defaultIcon from '../../media/Default_Food_Icon.png';
 
-const ProductCard = () => {
+const ProductCard:React.FC<cardProps> = ({name, image, price}) => {
 	return (
 		<div className='relative m-10 flex w-full max-w-xs flex-col overflow-hidden rounded-lg border-gray-100 border bg-oasisGradient-antiFlashWhite shadow-md'>
 			<div className='absolute z-10 overflow-hidden w-full text-right top-4'>
@@ -20,7 +22,7 @@ const ProductCard = () => {
 					href='#'>
 					<Image
 						className='object-contain'
-						src={defaultIcon}
+						src={image || defaultIcon}
 						alt='productImage'
 					/>
 				</a>
@@ -28,13 +30,13 @@ const ProductCard = () => {
 					<div className='mt-2 mb-5 flex items-center justify-between'>
 						<p>
 							<span className='text-3xl font-bold text-slate-900'>
-								Price
+								{price || 0}
 							</span>
 						</p>
 					</div>
 					<a href='#'>
 						<h5 className='text-xl tracking-tight text-slate-900'>
-							Name
+							{name || ""}
 						</h5>
 					</a>
 				</div>
