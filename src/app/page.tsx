@@ -1,9 +1,11 @@
 "use client"
-import ProductCard from "@/components/productCard";
+import Navbar from '../components/navbar/index'
+
 const home = () => {
 	return (
 
-    <div>
+    <div className='h-screen'>
+		<Navbar />
 			<div>Home</div>
     </div>
 
