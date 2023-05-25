@@ -14,6 +14,7 @@ module.exports = {
       },
       colors: {
         oasisGradient: {
+          black: '#2B2845',
           white: '#FFFFFF',
           antiFlashWhite: '#EBEBEB',
           rust: '#A0522D',
@@ -28,6 +29,7 @@ module.exports = {
       },
       backgroundColor: {
         oasisGradient: {
+          black: '#2B2845',
           white: '#FFFFFF',
           antiFlashWhite: '#EBEBEB',
           rust: '#A0522D',
@@ -40,6 +42,12 @@ module.exports = {
           lightGreen: '#87F6B2',
         }
       },
+      spacing: {
+        '1/10': '10%',
+        '1.5/10': '15%',
+        '5.5': '1.375rem',
+        '59%': '59%',
+      }
     },
   },
   plugins: [],
