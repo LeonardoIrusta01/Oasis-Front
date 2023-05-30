@@ -3,7 +3,7 @@ import { useState } from 'react';
 import IcardProps from './Interface';
 import ProductAddModal from '../productAddModal';
 import Image from 'next/image';
-import defaultIcon from '../../media/Default_Food_Icon.png';
+import defaultIcon from '../../assets/images/Default_Food_Icon.png';
 
 const ProductCard: React.FC<IcardProps> = ({ name, image, price, isModalShown, setIsModalShown }) => {
 
