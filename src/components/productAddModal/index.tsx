@@ -25,21 +25,18 @@ const ProductAddModal: React.FC<IProductAddModal> = ({setIsModalShown, price}) =
 	};
 
 	return (
-		<div className='inset-0 z-10 justify-center aling-center'>
+		<div className='inset-0 justify-center aling-center'>
 			<div
 				id='modal-flex-container'
 				className='items-left sm:block sm:p-0'>
-				<div
+				<button
 					id='modal-bg-container'
-					className='fixed inset-0 bg-gray-700 bg-opacity-75'
-				/>
-				<div
-					id='modal-space-container'
-					className='hidden sm:inline sm:align-middle sm:h-screen'
+					onClick={handleOnClick}
+					className='fixed inset-0 bg-gray-500/20 bg-opacity-10'
 				/>
 				<div
 					id='modal-container'
-					className='animate-slide-top fixed -bottom-10 right-0 inline-block align-bottom bg-oasisGradient-cambridgeBlue rounded-lg text-left overflow-hidden shadow-xl sm:my-8 sm:align-middle sm:max-w-lg w-full'>
+					className='z-10 animate-slide-top fixed -bottom-10 right-0 inline-block align-bottom bg-oasisGradient-cambridgeBlue rounded-lg text-left overflow-hidden shadow-xl sm:my-8 sm:align-middle sm:max-w-lg w-full'>
 					<div
 						id='modal-wrapper'
 						className='bg-oasisGradient-cambridgeBlue px-4 pb-4 sm:p-6 sm:pb-4'>
@@ -109,16 +106,6 @@ const ProductAddModal: React.FC<IProductAddModal> = ({setIsModalShown, price}) =
 							</div>
 						</div>
 					</div>
-					{/* <div className='modal-actions bg-oasisGradient-antiFlashWhite px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse'>
-						<button className='w-full inline-flex justify-center rounded-md border border-transparent shadow-md px-4 py-2 bg-oasisGradient-antiFlashWhite text-gray-900 hover:bg-oasisGradient-seaGreen sm:mt-0 sm:ml-0 sm:w-auto sm:text-sm'>
-							Agregar al carrito
-						</button>
-						<button
-							onClick={handleOnClick}
-							className='w-full inline-flex justify-center rounded-md border border-transparent shadow-md px-4 py-2 mt-3 bg-oasisGradient-antiFlashWhite text-gray-900 hover:bg-oasisGradient-white sm:mt-0 sm:ml-0 sm:w-auto sm:text-sm'>
-							Cancelar
-						</button> */}
-					{/* </div> */}
 				</div>
 			</div>
 		</div>
