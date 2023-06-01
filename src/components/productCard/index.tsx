@@ -1,10 +1,7 @@
-import React, { Fragment } from 'react';
-import { useState } from 'react';
+import React from 'react';
 import IcardProps from './Interface';
-import ProductAddModal from '../productAddModal';
 import Image from 'next/image';
 import defaultIcon from '../../assets/images/Default_Food_Icon.png';
-import { isNullishCoalesce } from 'typescript';
 
 const ProductCard: React.FC<IcardProps> = ({
 	name,
