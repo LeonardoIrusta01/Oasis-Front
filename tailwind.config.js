@@ -51,6 +51,9 @@ module.exports = {
 				'15.5%': '15.5%',
 				'21.95%': '21.95%',
 			},
+			width: {
+				'screen/90': '90vw'
+			},
 			animation: {
 				'slide-top': 'slide-top 0.7s ease-in-out both',
 			},
