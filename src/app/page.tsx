@@ -4,6 +4,7 @@ import ProductCard from '@/components/productCard';
 import ProductAddModal from '@/components/productAddModal';
 import Navbar from '../components/navbar/index';
 import { useGetProductsQuery } from '@/redux/servicies/productsApi';
+import Link from 'next/link';
 
 const Home = () => {
 	const [isModalShown, setIsModalShown] = useState(false);
@@ -33,19 +34,21 @@ const Home = () => {
 					data?.payload.map((e) => {
 						return (
 							<div className='w-44% md:w-21.95% lg:w-15.5% relative m-3 flex flex-col overflow-hidden rounded-lg border bg-oasisGradient-antiFlashWhite shadow-md'>
-								<ProductCard
-									name={e.name}
-									price={e.price}
-									image={''}
-									isModalShown={isModalShown}
-									setIsModalShown={setIsModalShown}
-								/>
-								{isModalShown ? (
-									<ProductAddModal
-										setIsModalShown={setIsModalShown}
+								<Link href={`/cardDetail/${e.id}`}>
+									<ProductCard
+										name={e.name}
 										price={e.price}
+										image={''}
+										isModalShown={isModalShown}
+										setIsModalShown={setIsModalShown}
 									/>
-								) : null}
+									{isModalShown ? (
+										<ProductAddModal
+											setIsModalShown={setIsModalShown}
+											price={e.price}
+										/>
+									) : null}
+								</Link>
 							</div>
 						);
 					})}
