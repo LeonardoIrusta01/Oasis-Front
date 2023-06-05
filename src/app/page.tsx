@@ -4,6 +4,7 @@ import ProductCard from '@/components/productCard';
 import ProductAddModal from '@/components/productAddModal';
 import Navbar from '../components/navbar/index';
 import { useGetProductsQuery } from '@/redux/servicies/productsApi';
+import Filter from '@/components/filter';
 import Link from 'next/link';
 
 const Home = () => {
@@ -29,6 +30,7 @@ const Home = () => {
 	return (
 		<div className='relative h-screen'>
 			<Navbar />
+			<Filter />
 			<div className='flex flex-row flex-wrap'>
 				{Array.isArray(data?.payload) &&
 					data?.payload.map((e) => {
