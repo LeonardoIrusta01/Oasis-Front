@@ -12,6 +12,7 @@ const Home = () => {
 
 	const { data, isError, isLoading } = useGetProductsQuery(null);
 
+
 	if (isLoading)
 		return (
 			<div className='relative h-screen'>

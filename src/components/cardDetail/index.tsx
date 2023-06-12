@@ -146,7 +146,7 @@ const CardDetailComponent: React.FC<ICardDetail> = ({ id }) => {
 									placeholder={`${count || 0}`}
 									className='text-lg text-gray-900 w-24 text-center rounded-md'
 								/>
-								<p>${count}</p>
+								<p className='pt-2'>${data?.payload?.price ? data.payload.price * count : 0}</p>
 							</div>
 							<button onClick={incrementCount}>
 								<svg
