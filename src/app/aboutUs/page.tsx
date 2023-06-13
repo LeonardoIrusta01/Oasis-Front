@@ -1,8 +1,7 @@
-"use client"
+"use client";
+import AboutUs from "@/components/aboutUs";
 const aboutUs = () => {
-    return(
-        <div>About Us</div>
-    )
-}
+  return <AboutUs />;
+};
 
-export default aboutUs
+export default aboutUs;
