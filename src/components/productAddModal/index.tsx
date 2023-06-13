@@ -2,14 +2,19 @@ import React from 'react';
 import { useState } from 'react';
 import { IProductAddModal } from './interface';
 
-const ProductAddModal: React.FC<IProductAddModal> = ({setIsModalShown, price}) => {
+const ProductAddModal: React.FC<IProductAddModal> = ({
+	setIsModalShown,
+	price,
+}) => {
 	const [count, setCount] = useState(0);
 
-	const incrementCount = () => {
+	const incrementCount = (e: any) => {
+		e.preventDefault();
 		setCount(count + 1);
 	};
 
-	const decrementCount = () => {
+	const decrementCount = (e: any) => {
+		e.preventDefault();
 		if (count > 0) {
 			setCount(count - 1);
 		}
@@ -19,10 +24,10 @@ const ProductAddModal: React.FC<IProductAddModal> = ({setIsModalShown, price}) =
 		event.preventDefault();
 		setIsModalShown(false);
 	};
-	
+
 	function handleChange(event: React.ChangeEvent<HTMLInputElement>): void {
 		setCount(Number(event.target.value));
-	};
+	}
 
 	return (
 		<div className='inset-0 justify-center aling-center'>
@@ -74,12 +79,12 @@ const ProductAddModal: React.FC<IProductAddModal> = ({setIsModalShown, price}) =
 								<div>
 									<input
 										placeholder={`${count || 0}`}
-										value={count || ""}
-										onChange = {handleChange}
+										value={count || ''}
+										onChange={handleChange}
 										type='number'
 										className='text-lg text-gray-900 w-24 text-center rounded-md'
 									/>
-									<p>${count * price}</p>
+									<p className='pt-2'>${count * price}</p>
 								</div>
 								<button onClick={incrementCount}>
 									<svg
