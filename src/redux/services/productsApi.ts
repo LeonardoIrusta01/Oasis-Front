@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-interface product {
+export interface product {
 	id: number;
 	name: string;
 	price: number;
@@ -34,8 +34,8 @@ export const productsApi = createApi({
 		baseUrl: 'http://localhost:3001',
 	}),
 	endpoints: (builder) => ({
-		getProducts: builder.query<apiProductsResponse, null>({
-			query: () => '/api/products',
+		getProducts: builder.query<apiProductsResponse, string>({
+			query: (query) => `/api/products?${query}`,
 		}),
 		getProductsById: builder.query<apiProductResponseById, string>({
 			query: (id) => `/api/products/${id}`,
