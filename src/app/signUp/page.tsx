@@ -1,8 +1,9 @@
 "use client"
+
+import SignUpComponent from "@/components/signUp"
+
 const signUp = () => {
-    return(
-        <div>Sign Up</div>
-    )
+    return <SignUpComponent />
 }
 
 export default signUp
