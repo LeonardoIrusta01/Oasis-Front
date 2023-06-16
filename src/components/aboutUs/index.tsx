@@ -7,10 +7,10 @@ const AboutUs = () => {
     <div className="h-screen w-sreen bg-oasisGradient-antiFlashWhite">
       <Navbar />
       <p
-        className="color-oasisGradient-black text-8 flex justify-center font-semibold"
+        className="colors-oasisGradient-black text-8 flex justify-center font-semibold"
         style={{ textShadow: "0px 4px 4px rgba(0,0,0,0.25)" }}
       >
-        About Us
+        Sobre Nostros
       </p>
       <div>
         <div className="flex flex-wrap p-4 justify-center items-center">
