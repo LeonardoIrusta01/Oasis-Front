@@ -1,15 +1,24 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProductCard from "@/components/productCard";
 import ProductAddModal from "@/components/productAddModal";
 import Navbar from "../components/navbar/index";
-import { useGetProductsQuery } from "@/redux/servicies/productsApi";
+import { useGetProductsQuery } from "@/redux/services/productsApi";
+import Filter from "@/components/filter";
 import Link from "next/link";
+import { getProducts } from "@/redux/features/productsReducer";
+import { useAppSelector } from "@/redux/hooks";
+import { useAppDispatch } from "@/redux/hooks";
+import { product } from "@/redux/services/productsApi";
 
 const Home = () => {
+  const dispatch = useAppDispatch();
   const [isModalShown, setIsModalShown] = useState(false);
-
-  const { data, isError, isLoading } = useGetProductsQuery(null);
+  const products = useAppSelector((state) => state.productReducer.products);
+  const { data, isError, isLoading } = useGetProductsQuery("");
+  useEffect(() => {
+    dispatch(getProducts(data?.payload));
+  }, [data]);
 
   if (isLoading)
     return (
@@ -25,18 +34,15 @@ const Home = () => {
       </div>
     );
   if (isError) return <p>Error</p>;
-
   return (
     <div className="relative h-screen">
       <Navbar />
+      <Filter />
       <div className="flex flex-row flex-wrap">
-        {Array.isArray(data?.payload) &&
-          data?.payload.map((e) => {
+        {products && products[0] ? (
+          products?.map((e: product) => {
             return (
-              <div
-                key={e.id}
-                className="w-44% md:w-21.95% lg:w-15.5% relative m-3 flex flex-col overflow-hidden rounded-lg border bg-oasisGradient-antiFlashWhite shadow-md"
-              >
+              <div className="w-44% md:w-21.95% lg:w-15.5% relative m-3 flex flex-col overflow-hidden rounded-lg border bg-oasisGradient-antiFlashWhite shadow-md">
                 <Link href={`/cardDetail/${e.id}`}>
                   <ProductCard
                     name={e.name}
@@ -54,7 +60,10 @@ const Home = () => {
                 </Link>
               </div>
             );
-          })}
+          })
+        ) : (
+          <p>No hay productos de esta categoría</p>
+        )}
       </div>
     </div>
   );
