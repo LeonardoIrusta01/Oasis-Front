@@ -1,8 +1,7 @@
-"use client"
+"use client";
+import ContactUs from "@/components/contactUs";
 const contactUs = () => {
-    return(
-        <div>Contact Us</div>
-    )
-}
+  return <ContactUs />;
+};
 
-export default contactUs
+export default contactUs;
