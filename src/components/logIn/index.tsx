@@ -21,7 +21,6 @@ const LoginComponent: React.FC = () => {
         onSubmit: async (values: LoginForm) => {
             const cookies = new Cookies()
             const res: any = await login(values)
-            console.log("userId", res.data?.payload);
             if (res.data) {
                 cookies.set("userId", res.data?.payload)
             }
