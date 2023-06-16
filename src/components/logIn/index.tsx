@@ -34,6 +34,13 @@ const LoginComponent: React.FC = () => {
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg>
                 </button>
+                <button type="button" className="transition duration-200 mt-6 bg-oasisGradient-castletonGreen hover:bg-oasisGradient-lightGreen focus:bg-oasisGradient-cambridgeBlue focus:shadow-sm focus:ring-4 focus:ring-oasisGradient-seaGreen2 focus:ring-opacity-50 text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center inline-block">
+                    <span className="inline-block mr-6 align-middle text-3xl font-bold text-black ">G</span>
+                    <span className="inline-block mr-3 text-lg align-middle">   Iniciar sesión con google</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-4 h-4 inline-block">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                </button>
             </div>
         </div>
     );
