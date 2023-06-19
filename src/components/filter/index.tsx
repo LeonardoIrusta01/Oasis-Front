@@ -5,11 +5,14 @@ import { useAppDispatch } from "@/redux/hooks";
 import { filterProducts } from "@/redux/features/productsReducer";
 import { Category } from "@/redux/services/categoryApi";
 import axios from "axios";
+import { useState } from "react";
 
 const Filter = () => {
   const { data, isError, isLoading } = useGetCategoriesQuery(null);
 
   const dispatch = useAppDispatch();
+
+  const [active, setActive] = useState<string>("");
 
   if (isError) {
     return <p>Error</p>;
@@ -24,6 +27,7 @@ const Filter = () => {
     name: string
   ) => {
     e.preventDefault();
+    setActive(name);
     const filtedProducts = (
       await axios(`http://localhost:3001/api/products?filter=${name}`)
     ).data.payload;
@@ -37,7 +41,11 @@ const Filter = () => {
           return (
             <div className="inline-block px-3">
               <button onClick={(e) => handleOnClick(e, c.name)} key={i}>
-                <div className="w-28 h-28 max-w-xs overflow-hidden rounded-full bg-oasisGradient-antiFlashWhite flex justify-center items-center">
+                <div
+                  className={`w-28 h-28 max-w-xs overflow-hidden rounded-full bg-oasisGradient-antiFlashWhite flex justify-center items-center border-4 ${
+                    active === c.name ? "border-x-oasisGradient-seaGreen" : ""
+                  }`}
+                >
                   <Image
                     src={defaultIcon}
                     alt="defaultIcon"
