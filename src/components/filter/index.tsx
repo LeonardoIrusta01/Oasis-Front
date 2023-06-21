@@ -35,7 +35,7 @@ const Filter = () => {
   };
 
   return (
-    <div className="flex overflow-x-scroll lg:overflow-hidden py-5 hide-scroll-bar">
+    <div className="flex overflow-x-scroll py-5 hide-scroll-bar">
       <div className="flex flex-nowrap">
         {data?.payload.map((c: Category, i) => {
           return (
@@ -52,7 +52,7 @@ const Filter = () => {
                     className="w-16 h-16"
                   />
                 </div>
-                <p className="flex justify-center font-bold pt-2">{c.name}</p>
+                <p className="flex justify-center font-bold pt-2">{c.name.charAt(0).toUpperCase() + c.name.slice(1)}</p>
               </button>
             </div>
           );
