@@ -31,7 +31,7 @@ const SideBar: React.FC<{ sideBarElement: LegacyRef<HTMLElement> }> = ({ sideBar
 							onClick={handleOnClick}
 							href='/'
 							className='flex items-center p-4 text-base font-normal bg-oasisGradient-rust text-oasisGradient-white rounded-lg'>
-							<span className='ml-3'>Home</span>
+							<span className='ml-3'>Inicio</span>
 						</Link>
 					</li>
 					<li>
@@ -39,7 +39,7 @@ const SideBar: React.FC<{ sideBarElement: LegacyRef<HTMLElement> }> = ({ sideBar
 							onClick={handleOnClick}
 							href='/aboutUs'
 							className='flex items-center p-4 text-base font-normal bg-oasisGradient-rust text-oasisGradient-white rounded-lg'>
-							<span className='ml-3'>About Us</span>
+							<span className='ml-3'>Sobre Nosotros</span>
 						</Link>
 					</li>
 					<li>
@@ -47,7 +47,7 @@ const SideBar: React.FC<{ sideBarElement: LegacyRef<HTMLElement> }> = ({ sideBar
 							onClick={handleOnClick}
 							href='/faq'
 							className='flex items-center p-4 text-base font-normal bg-oasisGradient-rust text-oasisGradient-white rounded-lg'>
-							<span className='ml-3'>FAQ</span>
+							<span className='ml-3'>Preguntas Frecuentes</span>
 						</Link>
 					</li>
 					<li>
@@ -55,7 +55,7 @@ const SideBar: React.FC<{ sideBarElement: LegacyRef<HTMLElement> }> = ({ sideBar
 							onClick={handleOnClick}
 							href='/contactUs'
 							className='flex items-center p-4 text-base font-normal bg-oasisGradient-rust text-oasisGradient-white rounded-lg'>
-							<span className='ml-3'>Contact</span>
+							<span className='ml-3'>Contáctanos</span>
 						</Link>
 					</li>
 					<button className='text-oasisGradient-white bg-oasisGradient-seaGreen2 fixed bottom-5 w-72 flex rounded-md flex-col justify-center items-center py-2'>
@@ -64,7 +64,7 @@ const SideBar: React.FC<{ sideBarElement: LegacyRef<HTMLElement> }> = ({ sideBar
 							alt='logOutIcon'
 							className='w-14 h-14 flex justify-center'
 						/>
-						Log Out
+						Cerrar Sesion
 					</button>
 				</ul>
 			</aside>
