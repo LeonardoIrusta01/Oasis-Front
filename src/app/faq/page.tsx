@@ -1,8 +1,8 @@
-"use client"
-const faq = () => {
-    return(
-        <div>FaQ</div>
-    )
-}
+"use client";
+import Faqs from "@/components/faq";
 
-export default faq
+const faq = () => {
+  return <Faqs />;
+};
+
+export default faq;
