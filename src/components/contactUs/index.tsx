@@ -54,116 +54,118 @@ const ContactMe = () => {
         Contáctanos
       </p>
 
-      <div className="flex justify-center p-3">
-        <div className="w-96 h-12 p-4 left-3 top-32 bg-oasisGradient-seaGreen flex items-center rounded-md">
-          <Image
-            className="w-9 h-9 left-2 top-2"
-            src={facebookLogo}
-            alt="facebookLogo"
-          />
-          <p className="p-4 text-oasisGradient-white">Facebook</p>
+      <div className="space-y-6">
+        <div className="flex justify-center">
+          <div className="w-96 h-12 p-4 left-3 top-32 bg-oasisGradient-seaGreen flex items-center rounded-md">
+            <Image
+              className="w-9 h-9 left-2 top-2"
+              src={facebookLogo}
+              alt="facebookLogo"
+            />
+            <p className="p-4 text-oasisGradient-white">Facebook</p>
+          </div>
         </div>
-      </div>
 
-      <div className="flex justify-center p-3">
-        <div className="w-96 h-12 p-4 left-3 top-32 bg-oasisGradient-seaGreen flex items-center rounded-md">
-          <Image
-            className="w-9 h-9 left-2 top-2"
-            src={instagramLogo}
-            alt="instagramLogo"
-          />
-          <p className="p-4 text-oasisGradient-white">Instagram</p>
+        <div className="flex justify-center">
+          <div className="w-96 h-12 p-4 left-3 top-32 bg-oasisGradient-seaGreen flex items-center rounded-md">
+            <Image
+              className="w-9 h-9 left-2 top-2"
+              src={instagramLogo}
+              alt="instagramLogo"
+            />
+            <p className="p-4 text-oasisGradient-white">Instagram</p>
+          </div>
         </div>
-      </div>
 
-      <div className="flex justify-center p-3">
-        <div className="w-96 h-12 p-4 left-3 top-32 bg-oasisGradient-seaGreen flex items-center rounded-md">
-          <Image
-            className="w-9 h-9 left-2 top-2"
-            src={whatsappLogo}
-            alt="whatsappLogo"
-          />
-          <p className="p-4 text-oasisGradient-white">WhatsApp</p>
+        <div className="flex justify-center">
+          <div className="w-96 h-12 p-4 left-3 top-32 bg-oasisGradient-seaGreen flex items-center rounded-md">
+            <Image
+              className="w-9 h-9 left-2 top-2"
+              src={whatsappLogo}
+              alt="whatsappLogo"
+            />
+            <p className="p-4 text-oasisGradient-white">WhatsApp</p>
+          </div>
         </div>
-      </div>
 
-      <Formik
-        className="flex justify-center p-4"
-        initialValues={initialValues}
-        onSubmit={handleSubmit}
-        validationSchema={validationSchema}
-      >
-        {({ isSubmitting }: FormikValues) => {
-          return (
-            <Form className="flex justify-center">
-              <div className="w-96 h-fit p-4 bg-oasisGradient-seaGreen flex rounded-md flex-col">
-                <div className="flex flex-row items-center left-2">
-                  <Image className="w-9 h-9" src={mailLogo} alt="mailLogo" />
-                  <p className="pl-4 text-oasisGradient-white">Email</p>
+        <Formik
+          className="flex justify-center p-4"
+          initialValues={initialValues}
+          onSubmit={handleSubmit}
+          validationSchema={validationSchema}
+        >
+          {({ isSubmitting }: FormikValues) => {
+            return (
+              <Form className="flex justify-center">
+                <div className="w-96 h-fit p-4 bg-oasisGradient-seaGreen flex rounded-md flex-col">
+                  <div className="flex flex-row items-center left-2">
+                    <Image className="w-9 h-9" src={mailLogo} alt="mailLogo" />
+                    <p className="pl-4 text-oasisGradient-white">Email</p>
+                  </div>
+
+                  <div className="space-y-3 pt-4">
+                    <Field
+                      type="text"
+                      placeholder="Nombre..."
+                      className="rounded-md w-full pl-2"
+                      name="name"
+                    />
+                    <ErrorMessage
+                      name="name"
+                      component="span"
+                      className="text-white text-xs"
+                    />
+
+                    <Field
+                      type="Email"
+                      placeholder="Mail..."
+                      className="rounded-md w-full pl-2"
+                      name="email"
+                    />
+                    <ErrorMessage
+                      name="email"
+                      component="span"
+                      className="text-white text-xs"
+                    />
+
+                    <Field
+                      type="text"
+                      placeholder="Asunto..."
+                      className="rounded-md w-full pl-2"
+                      name="subject"
+                    />
+                    <ErrorMessage
+                      name="subject"
+                      component="span"
+                      className="text-white text-xs"
+                    />
+
+                    <Field
+                      as="textarea"
+                      placeholder="Mensaje..."
+                      className="rounded-md w-full h-32 pl-2 resize-none"
+                      name="message"
+                    />
+                    <ErrorMessage
+                      name="message"
+                      component="span"
+                      className="text-white text-xs"
+                    />
+
+                    <button
+                      className="bg-oasisGradient-castletonGreen text-oasisGradient-white w-full h-8 rounded-md"
+                      type="submit"
+                      disabled={isSubmitting}
+                    >
+                      {buttonMessage}
+                    </button>
+                  </div>
                 </div>
-
-                <div className="space-y-3 pt-4">
-                  <Field
-                    type="text"
-                    placeholder="Nombre..."
-                    className="rounded-md w-full pl-2"
-                    name="name"
-                  />
-                  <ErrorMessage
-                    name="name"
-                    component="span"
-                    className="text-white text-xs"
-                  />
-
-                  <Field
-                    type="Email"
-                    placeholder="Mail..."
-                    className="rounded-md w-full pl-2"
-                    name="email"
-                  />
-                  <ErrorMessage
-                    name="email"
-                    component="span"
-                    className="text-white text-xs"
-                  />
-
-                  <Field
-                    type="text"
-                    placeholder="Asunto..."
-                    className="rounded-md w-full pl-2"
-                    name="subject"
-                  />
-                  <ErrorMessage
-                    name="subject"
-                    component="span"
-                    className="text-white text-xs"
-                  />
-
-                  <Field
-                    as="textarea"
-                    placeholder="Mensaje..."
-                    className="rounded-md w-full h-32 pl-2 resize-none"
-                    name="message"
-                  />
-                  <ErrorMessage
-                    name="message"
-                    component="span"
-                    className="text-white text-xs"
-                  />
-
-                  <button
-                    className="bg-oasisGradient-castletonGreen text-oasisGradient-white w-full h-8 rounded-md"
-                    type="submit"
-                    disabled={isSubmitting}
-                  >
-                    {buttonMessage}
-                  </button>
-                </div>
-              </div>
-            </Form>
-          );
-        }}
-      </Formik>
+              </Form>
+            );
+          }}
+        </Formik>
+      </div>
     </div>
   );
 };
