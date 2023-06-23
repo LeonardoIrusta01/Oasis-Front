@@ -45,6 +45,9 @@ module.exports = {
       fontSize: {
         8: "32px",
       },
+      fontFamily: {
+        'sansita': ['Sansita Swashed', 'cursive']
+      },
       spacing: {
         "1/10": "10%",
         "1.5/10": "15%",
