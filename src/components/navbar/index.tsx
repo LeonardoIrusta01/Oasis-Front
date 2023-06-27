@@ -15,37 +15,40 @@ const Navbar = () => {
 	const hidden = useAppSelector((state) => state.toggleSideBarReducer.hidden);
 
 	const sideBarElement = useRef<HTMLDivElement>(null);
+	const menuRef = useRef<HTMLButtonElement>(null);
 
 	useEffect(() => {
 		const handleClickOutside = (event: MouseEvent) => {
 			if (
 				sideBarElement.current &&
-				!sideBarElement.current.contains(event.target as Node)
+				!sideBarElement.current.contains(event.target as Node) &&
+				!menuRef.current!.contains(event.target as Node)
 			) {
-				dispatch(toggleSideBar());
+				dispatch(toggleSideBar(true));
 			}
 		};
 		window.addEventListener('mousedown', handleClickOutside);
 		return () =>
 			window.removeEventListener('mousedown', handleClickOutside);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [sideBarElement]);
 
 	return (
 		<>
-			{!hidden && <SideBar sideBarElement={sideBarElement} />}
-			<div className='w-full h-1/10 bg-oasisGradient-seaGreen flex items-center px-2'>
-				<Menu />
+			<SideBar sideBarElement={sideBarElement} hidden={hidden} />
+			<div className='relative w-full h-1/10 bg-oasisGradient-seaGreen flex items-center space-x-3 pr-3 pl-9'>
+				<Menu menuRef={menuRef} />
 				<InputSearch label='prueba' />
-				<Link href={'/profile'}>
+				<Link href={'/profile'} className='flex justify-center'>
 					<Image
-						className='ml-3 w-6 h-6 text-oasisGradient-black'
+						className='w-6 h-6 text-oasisGradient-black min-w-fit'
 						src={userIcon}
 						alt='logo'
 					/>
 				</Link>
-				<Link href={'/cart'}>
+				<Link href={'/cart'} className='flex justify-center'>
 					<Image
-						className='mx-3 w-6 h-6 text-oasisGradient-black'
+						className='w-6 h-6 text-oasisGradient-black min-w-fit'
 						src={cartIcon}
 						alt='logo'
 					/>

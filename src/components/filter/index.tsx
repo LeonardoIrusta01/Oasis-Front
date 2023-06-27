@@ -39,8 +39,8 @@ const Filter = () => {
       <div className="flex flex-nowrap">
         {data?.payload.map((c: Category, i) => {
           return (
-            <div className="inline-block px-3">
-              <button onClick={(e) => handleOnClick(e, c.name)} key={i}>
+            <div className="inline-block px-3" key={`category${c.name}`}>
+              <button onClick={(e) => handleOnClick(e, c.name)} >
                 <div
                   className={`w-28 h-28 max-w-xs overflow-hidden rounded-full bg-oasisGradient-antiFlashWhite flex justify-center items-center border-4 ${
                     active === c.name ? "border-x-oasisGradient-seaGreen" : ""

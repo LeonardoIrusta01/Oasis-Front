@@ -7,8 +7,8 @@ export const productSlice = createSlice({
         products: []
     },
     reducers: {
-        getProducts: (state, action) => {
-            state.products = action.payload
+        getProducts: (state: any, action) => {
+            state.products = action.payload ? [...action.payload, ...(state?.products || [])] : action.payload
         },
         filterProducts: (state, action) => {
             state.products = action.payload

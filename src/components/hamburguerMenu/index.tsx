@@ -1,47 +1,42 @@
-import React, { useState } from 'react';
-import { useAppDispatch} from '@/redux/hooks';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import  {toggleSideBar}  from '@/redux/features/sideBarSwitch';
+import { IHamburguerMenu } from './interface'
 
-const Hamburguer = () => {
-	const [isOpen, setIsOpen] = useState(false);
 
+const Hamburguer: React.FC<IHamburguerMenu> = ({ menuRef }) => {
+	const hidden = useAppSelector((state) => state.toggleSideBarReducer.hidden);
 	const dispatch = useAppDispatch();
 	return (
-		<div>
 			<button
-				className='flex flex-col h-12 w-12 border-2 border-transparent rounded justify-center items-center group'
+				ref={menuRef}
+				key='hamburguerMenu'
+				className='flex flex-col h-12 w-12 border-2 border-transparent rounded justify-center items-center group z-50 absolute left-0 top-1/2 transform -translate-y-1/2'
 				onClick={() => {
-					setIsOpen(!isOpen);
-					dispatch(toggleSideBar())
+					dispatch(toggleSideBar(hidden ? false : true))
 				}}
-				data-drawer-target='default-sidebar'
-				data-drawer-toggle='default-sidebar'
-				aria-controls='default-sidebar'
 				type='button'>
 				<div
 					className={`h-1 w-6 mb-1 rounded-full bg-oasisGradient-black transition ease transform duration-300 ${
-						isOpen
-							? 'rotate-45 translate-y-2 opacity-50 group-hover:opacity-100'
-							: 'opacity-50 group-hover:opacity-100'
+						!hidden
+							? 'rotate-45 translate-y-2'
+							: ''
 					}`}
 				/>
 				<div
 					className={`h-1 w-6 rounded-full bg-oasisGradient-black transition ease transform duration-300 ${
-						isOpen
+						!hidden
 							? 'opacity-0'
-							: 'opacity-50 group-hover:opacity-100'
+							: ''
 					}`}
 				/>
 				<div
 					className={`h-1 w-6 mt-1 rounded-full bg-oasisGradient-black transition ease transform duration-300 ${
-						isOpen
-							? '-rotate-45 -translate-y-2 opacity-50 group-hover:opacity-100'
-							: 'opacity-50 group-hover:opacity-100'
+						!hidden
+							? '-rotate-45 -translate-y-2'
+							: ''
 					}`}
 				/>
 			</button>
-			
-		</div>
 	);
 };
 

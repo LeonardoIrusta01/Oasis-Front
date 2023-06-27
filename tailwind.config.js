@@ -58,12 +58,14 @@ module.exports = {
         "21.95%": "22.2%",
         "7/10": "70%",
         "screen/90": "90vw",
+        screen: '100%'
       },
       maxWidth: {
         "52.5":"210px"
       },
       animation: {
         "slide-top": "slide-top 0.7s ease-in-out both",
+        "in-out-sidebar": 'all .7s linear '
       },
       keyframes: {
         "slide-top": {

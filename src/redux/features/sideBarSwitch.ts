@@ -4,7 +4,7 @@ const SideBarSwitch = createSlice({
     name: "switchSideBar",
     initialState: {hidden:true},
     reducers: {
-        toggleSideBar: (state) => {state.hidden = !state.hidden}
+        toggleSideBar: (state, action) => {state.hidden = action.payload}
     }
 })
 

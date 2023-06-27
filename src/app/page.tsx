@@ -1,48 +1,60 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import ProductCard from "@/components/productCard";
 import ProductAddModal from "@/components/productAddModal";
 import Navbar from "../components/navbar/index";
-import { useGetProductsQuery } from "@/redux/services/productsApi";
+import { useGetProductsQuery, product } from "@/redux/services/productsApi";
 import Filter from "@/components/filter";
 import Link from "next/link";
 import { getProducts } from "@/redux/features/productsReducer";
-import { useAppSelector } from "@/redux/hooks";
-import { useAppDispatch } from "@/redux/hooks";
-import { product } from "@/redux/services/productsApi";
+import { useAppSelector, useAppDispatch } from "@/redux/hooks";
 
 const Home = () => {
   const dispatch = useAppDispatch();
   const [isModalShown, setIsModalShown] = useState(false);
   const products = useAppSelector((state) => state.productReducer.products);
-  const { data, isError, isLoading } = useGetProductsQuery("");
+  const [page, setPage] = useState<number>(1);
+  const { data, isError, isLoading, isFetching } = useGetProductsQuery(`limit=30&page=${page}`);
+  const containerRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     dispatch(getProducts(data?.payload));
   }, [data]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const container = containerRef.current;
+      if (container) {
+        const { scrollTop, scrollHeight, clientHeight } = container;
+        if (scrollTop + clientHeight >= scrollHeight && !isLoading && page < 120) {
+          setPage(page + 1);
+        }
+      }
+    };
+
+    containerRef.current?.addEventListener('scroll', handleScroll);
+  }, [isLoading, page, containerRef]);
 
   if (isLoading)
     return (
       <div className="relative h-screen">
         <Navbar />
-        <div className="bg-gray-200 w-full min-h-screen flex justify-center items-center">
-          <div className="flex min-h-screen w-full items-center justify-center bg-gray-200">
-            <div className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-tr from-oasisGradient-antiFlashWhite to-oasisGradient-seaGreen2 animate-spin">
-              <div className="h-9 w-9 rounded-full bg-gray-200"></div>
-            </div>
-          </div>
+        <div className="flex justify-center items-center w-full h-screen/90">
+          <svg className="animate-spin h-10 w-10 mr-3 border-4 border-r-indigo-500 rounded-full" viewBox="0 0 24 24"/>
         </div>
       </div>
     );
   if (isError) return <p>Error</p>;
   return (
-    <div className="relative h-screen">
+    <div className="relative h-screen overflow-y-scroll" ref={containerRef}>
       <Navbar />
       <Filter />
       <div className="flex flex-row flex-wrap">
-        {products && products[0] ? (
-          products?.map((e: product) => {
+        { products?.[0] ? (
+          products?.map((e: product, index) => {
             return (
-              <div className="w-44% md:w-21.95% lg:w-15.5% relative m-3 flex flex-col overflow-hidden rounded-lg border bg-oasisGradient-antiFlashWhite shadow-md">
+              <div key={`index${e.id}`} className="w-44% md:w-21.95% lg:w-15.5% relative m-3 flex flex-col overflow-hidden rounded-lg border bg-oasisGradient-antiFlashWhite shadow-md">
                 <Link href={`/cardDetail/${e.id}`}>
                   <ProductCard
                     name={e.name}
@@ -63,6 +75,11 @@ const Home = () => {
           })
         ) : (
           <p>No hay productos de esta categoría</p>
+        )}
+        {isFetching && (
+        <div className="flex w-full justify-center items-center">
+          <svg className="animate-spin h-10 w-10 mr-3 border-4 border-r-indigo-500 rounded-full" viewBox="0 0 24 24"/>
+        </div>
         )}
       </div>
     </div>

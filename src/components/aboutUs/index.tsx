@@ -26,6 +26,8 @@ const AboutUs = () => {
             y muchos productos mas.
           </p>
           <Image
+            placeholder="blur"
+            priority={false}
             src={defaultIcon}
             alt="default_Food_Icon"
             className="w-52 h-52"
