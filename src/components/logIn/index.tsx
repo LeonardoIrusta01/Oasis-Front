@@ -3,6 +3,7 @@ import React from 'react';
 import { useFormik } from "formik";
 import { LoginValidate } from '@/utils/validateForm';
 import { useLoginMutation } from '@/redux/services/usersApi';
+import Cookies from 'universal-cookie';
 
 export interface LoginForm {
     email: string;
@@ -10,6 +11,7 @@ export interface LoginForm {
 }
 
 const LoginComponent: React.FC = () => {
+
 
     const [login] = useLoginMutation()
     const googleLogin = () => { window.open("http://localhost:3001/api/auth/google", "_self") }
@@ -20,7 +22,12 @@ const LoginComponent: React.FC = () => {
         },
         validationSchema: LoginValidate,
         onSubmit: async (values: LoginForm) => {
-            await login(values);
+            const res = await login(values);
+            const cookies = new Cookies()
+            cookies.set("sessionId", res.data.payload.sessionId)
+            cookies.set("userId", res.data.payload.user.id)
+            const sessionId = cookies.get("sessionId")
+            if (sessionId) {window.location.replace("/")}
         },
     });
     return (
@@ -46,7 +53,8 @@ const LoginComponent: React.FC = () => {
                             <div>
                                 <label className="font-semibold text-sm text-oasisGradient-antiFlashWhite pb-1 py-2 block">Email</label>
                                 <input
-                                    type="text"
+                                    type="email"
+                                    name="email"
                                     placeholder='Tu email...'
                                     className="border rounded-lg px-3 py-2 mb-5 text-sm w-full"
                                     value={formik.values.email}
@@ -57,10 +65,11 @@ const LoginComponent: React.FC = () => {
                             <div>
                                 <label className="font-semibold text-sm text-oasisGradient-antiFlashWhite pb-1 block">Contraseña</label>
                                 <input
-                                    type="text"
+                                    type="password"
+                                    name="password"
                                     placeholder='Tu contraseña...'
                                     className="border rounded-lg px-3 py-2 mb-5 text-sm w-full"
-                                    value={formik.values.email}
+                                    value={formik.values.password}
                                     onChange={formik.handleChange}
                                 />
                                 {formik.touched.password && formik.errors.password}

@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import default_food_icon from '../../assets/images/Default_Food_Icon.png';
 import Navbar from '../navbar';
+import FooterComponent from '../footer';
 
 const CartComponent = () => {
 	const productname = 'Producto';
@@ -76,7 +77,7 @@ const CartComponent = () => {
 						</div>
 					</li>
 				</ul>
-				<div className='w-full fixed flex bottom-4 justify-around right-0 md:justify-end md:space-x-6 md:mr-6'>
+				<div className='w-full relative flex -bottom-59% justify-around right-0 md:justify-end md:space-x-6 md:mr-6'>
 					<button className='bg-red-600 w-2/5 max-w-52.5 h-16 rounded-md p-2'>
 						Eliminar carrito
 					</button>
@@ -85,6 +86,7 @@ const CartComponent = () => {
 					</button>
 				</div>
 			</div>
+			<FooterComponent />
 		</>
 	);
 };

@@ -4,6 +4,7 @@ import { useAppDispatch } from '@/redux/hooks';
 import Image from 'next/image';
 import Log_Out_Icon from '../../assets/images/Log_Out_Icon.png';
 import React, { LegacyRef } from 'react';
+import axios from 'axios';
 
 const SideBar: React.FC<{ sideBarElement: LegacyRef<HTMLElement> }> = ({ sideBarElement }) => {
 	const dispatch = useAppDispatch();
@@ -11,6 +12,12 @@ const SideBar: React.FC<{ sideBarElement: LegacyRef<HTMLElement> }> = ({ sideBar
 	const handleOnClick = () => {
 		dispatch(toggleSideBar());
 	};
+
+	const handleLogOut = async () => {
+		console.log("hola")
+		const res = (await axios("http://localhost:3001/api/auth/logout")).data
+		console.log(res)
+	}
 
 	return (
 		<>
@@ -58,7 +65,7 @@ const SideBar: React.FC<{ sideBarElement: LegacyRef<HTMLElement> }> = ({ sideBar
 							<span className='ml-3'>Contáctanos</span>
 						</Link>
 					</li>
-					<button className='text-oasisGradient-white bg-oasisGradient-seaGreen2 fixed bottom-5 w-72 flex rounded-md flex-col justify-center items-center py-2'>
+					<button onClick={handleLogOut} className='text-oasisGradient-white bg-oasisGradient-seaGreen2 fixed bottom-5 w-72 flex rounded-md flex-col justify-center items-center py-2'>
 						<Image
 							src={Log_Out_Icon}
 							alt='logOutIcon'

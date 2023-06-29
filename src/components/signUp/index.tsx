@@ -5,7 +5,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 
 export interface Form {
-  name: string;
+  firstName: string;
   lastName: string;
   email: string;
   cellphone: number;
@@ -17,7 +17,7 @@ const SignUpComponent: React.FC = () => {
   const [register] = useRegisterMutation();
   const formik = useFormik<Form>({
     initialValues: {
-      name: "",
+      firstName: "",
       lastName: "",
       email: "",
       cellphone: 0,
@@ -27,10 +27,10 @@ const SignUpComponent: React.FC = () => {
     validationSchema: RegisterValidate,
     onSubmit: async (values: Form) => {
       await register(values);
+      window.location.replace("/login")
     },
   });
 
-  const [confirmPassword, setConfirmPassword] = useState("");
   const [showPass, setShowPass] = useState(false)
 
   return (
@@ -77,11 +77,11 @@ const SignUpComponent: React.FC = () => {
                     type="text"
                     placeholder="Tu nombre..."
                     className="border rounded-lg md:w-96 md:block md:ml-4 px-3 py-2 mb-5 text-sm w-full"
-                    name="name"
-                    value={formik.values.name}
+                    name="firstName"
+                    value={formik.values.firstName}
                     onChange={formik.handleChange}
                   />
-                  {formik.touched.name && formik.errors.name}
+                  {formik.touched.firstName && formik.errors.firstName}
                 </div>
                 <div>
                   <label className="font-semibold text-sm text-oasisGradient-antiFlashWhite pb-1 py-2 block md:ml-4">
@@ -145,7 +145,6 @@ const SignUpComponent: React.FC = () => {
                 </div>
 
                 <div>
-
                   <label className="font-semibold md:ml-4 text-sm text-oasisGradient-antiFlashWhite pb-1 block">
                     Confirmar contraseña
                   </label>
@@ -155,7 +154,7 @@ const SignUpComponent: React.FC = () => {
                     className="border rounded-lg px-3 py-2 md:w-96 md:ml-4 text-sm w-full"
                   />
                 </div>
-                <div className="pointer hover:cursor-pointer absolute " onClick={() => setShowPass(!showPass)}>
+                <div className="pointer hover:cursor-pointer w-8 text-left" onClick={() => setShowPass(!showPass)}>
                   {showPass ? <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" height={"1.5rem"}>
                     <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
                     <path fillRule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clipRule="evenodd" />
