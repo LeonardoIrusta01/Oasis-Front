@@ -1,17 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { IApiResponseCategories } from './inteface';
 
-export interface ApiResponseCategories {
-    status: string
-    payload: [{
-        name: string,
-        image: string
-    }]
-}
-
-export interface Category {
-    name: string
-    image: string
-}
 
 export const categoryApi = createApi({
     reducerPath: 'categoryApi',
@@ -19,7 +8,7 @@ export const categoryApi = createApi({
         baseUrl: 'http://localhost:3001',
     }),
     endpoints: (builder) => ({
-        getCategories: builder.query<ApiResponseCategories, null>({
+        getCategories: builder.query<IApiResponseCategories, null>({
             query: () => "/api/categories"
         })
     }),

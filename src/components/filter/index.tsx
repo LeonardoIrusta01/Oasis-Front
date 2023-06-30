@@ -1,9 +1,9 @@
 import Image from "next/image";
 import defaultIcon from "../../assets/images/Default_Food_Icon.png";
-import { useGetCategoriesQuery } from "@/redux/services/categoryApi";
+import { useGetCategoriesQuery } from "@/redux/services/category/categoryApi";
 import { useAppDispatch } from "@/redux/hooks";
 import { filterProducts } from "@/redux/features/productsReducer";
-import { Category } from "@/redux/services/categoryApi";
+import { Category } from "@/redux/services/category/categoryApi";
 import axios from "axios";
 import { useState } from "react";
 

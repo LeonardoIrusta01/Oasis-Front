@@ -3,13 +3,13 @@ import { useEffect, useState } from 'react';
 import ProductCard from '@/components/productCard';
 import ProductAddModal from '@/components/productAddModal';
 import Navbar from '../components/navbar/index';
-import { useGetProductsQuery } from '@/redux/services/productsApi';
+import { useGetProductsQuery } from '@/redux/services/product/productsApi';
 import Filter from '@/components/filter';
 import Link from 'next/link';
 import { getProducts } from '@/redux/features/productsReducer';
 import { useAppSelector } from '@/redux/hooks';
 import { useAppDispatch } from '@/redux/hooks';
-import { product } from '@/redux/services/productsApi';
+import { product } from '@/redux/services/product/productsApi';
 import FooterComponent from '@/components/footer';
 
 const Home = () => {

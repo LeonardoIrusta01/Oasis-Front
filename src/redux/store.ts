@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { productsApi } from './services/productsApi';
-import { usersApi } from './services/usersApi';
+import { productsApi } from './services/product/productsApi';
+import { usersApi } from './services/user/usersApi';
 import { setupListeners } from '@reduxjs/toolkit/dist/query';
 import toggleSideBar from './features/sideBarSwitch';
 import { productSlice } from './features/productsReducer';
-import { categoryApi } from './services/categoryApi';
+import { categoryApi } from './services/category/categoryApi';
 
 export const store = configureStore({
 	reducer: {

@@ -1,5 +1,5 @@
 import Navbar from '../navbar';
-import { useGetUserByIdQuery } from '@/redux/services/usersApi';
+import { useGetUserByIdQuery } from '@/redux/services/user/usersApi';
 import Image from 'next/image';
 import axios from 'axios';
 import userDefaultIcon from '../../assets/images/User_Icon.png';

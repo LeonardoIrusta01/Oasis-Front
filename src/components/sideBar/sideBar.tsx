@@ -13,12 +13,6 @@ const SideBar: React.FC<{ sideBarElement: LegacyRef<HTMLElement> }> = ({ sideBar
 		dispatch(toggleSideBar());
 	};
 
-	const handleLogOut = async () => {
-		console.log("hola")
-		const res = (await axios("http://localhost:3001/api/auth/logout")).data
-		console.log(res)
-	}
-
 	return (
 		<>
 			<div className='fixed flex w-full z-10 h-full bg-gray-800 opacity-50'></div>
@@ -65,7 +59,7 @@ const SideBar: React.FC<{ sideBarElement: LegacyRef<HTMLElement> }> = ({ sideBar
 							<span className='ml-3'>Contáctanos</span>
 						</Link>
 					</li>
-					<button onClick={handleLogOut} className='text-oasisGradient-white bg-oasisGradient-seaGreen2 fixed bottom-5 w-72 flex rounded-md flex-col justify-center items-center py-2'>
+					<button className='text-oasisGradient-white bg-oasisGradient-seaGreen2 fixed bottom-5 w-72 flex rounded-md flex-col justify-center items-center py-2'>
 						<Image
 							src={Log_Out_Icon}
 							alt='logOutIcon'
