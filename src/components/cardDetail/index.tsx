@@ -3,8 +3,12 @@ import React from 'react';
 import { useState } from 'react';
 import defaultIcon from '../../assets/images/Default_Food_Icon.png';
 import Link from 'next/link';
-import { useGetProductsByIdQuery } from '@/redux/services/productsApi';
+import { useGetProductsByIdQuery } from '@/redux/services/product/productsApi';
 import Navbar from '../navbar';
+import FooterComponent from '../footer';
+import MinusIcon from '../../assets/svg/Minus Icon.svg';
+import PlusIcon from '../../assets/svg/Plus Icon.svg';
+import ArrowBackButton from '../../assets/svg/Arrow Back Button.svg';
 
 interface ICardDetail {
 	id: string;
@@ -45,53 +49,9 @@ const CardDetailComponent: React.FC<ICardDetail> = ({ id }) => {
 			<div className='w-full flex justify-center flex-col bg-oasisGradient-antiFlashWhite h-screen md:flex-row lg:flex-row'>
 				<div className='w-full bg-oasisGradient-white md:w-14 lg:w-14'>
 					<Link href={'/'} className='flex w-14'>
-						<svg
-							width='64px'
-							height='64px'
-							viewBox='-4.8 -4.8 33.60 33.60'
-							xmlns='http://www.w3.org/2000/svg'
-							fill='#000000'
-							transform='matrix(1, 0, 0, 1, 0, 0)'>
-							<g id='SVGRepo_bgCarrier' stroke-width='0'></g>
-							<g
-								id='SVGRepo_tracerCarrier'
-								stroke-linecap='round'
-								stroke-linejoin='round'
-								stroke='#CCCCCC'
-								stroke-width='0.096'></g>
-							<g id='SVGRepo_iconCarrier'>
-								{' '}
-								<title></title>{' '}
-								<g id='Complete'>
-									{' '}
-									<g id='arrow-left'>
-										{' '}
-										<g>
-											{' '}
-											<polyline
-												data-name='Right'
-												fill='none'
-												id='Right-2'
-												points='7.6 7 2.5 12 7.6 17'
-												stroke='#000000'
-												stroke-linecap='round'
-												stroke-linejoin='round'
-												stroke-width='1.2'></polyline>{' '}
-											<line
-												fill='none'
-												stroke='#000000'
-												stroke-linecap='round'
-												stroke-linejoin='round'
-												stroke-width='1.2'
-												x1='21.5'
-												x2='4.8'
-												y1='12'
-												y2='12'></line>{' '}
-										</g>{' '}
-									</g>{' '}
-								</g>{' '}
-							</g>
-						</svg>
+						<Image
+							src={ArrowBackButton}
+							alt='ArrowBackButton'></Image>
 					</Link>
 				</div>
 				<div className='w-full flex items-center justify-center p-8 flex-col bg-oasisGradient-white md:flex-row md:w-1/2 lg:w-1/2'>
@@ -112,7 +72,7 @@ const CardDetailComponent: React.FC<ICardDetail> = ({ id }) => {
 				</div>
 				<div
 					id='modal-container'
-					className='fixed bottom-5 mx-5 bg-oasisGradient-cambridgeBlue text-left overflow-hidden shadow-xl sm:my-8 align-middle max-w-md w-screen/90 lg:right-16 md:max-w-lg'>
+					className='absolute bottom-5 mx-5 bg-oasisGradient-cambridgeBlue text-left overflow-hidden shadow-xl sm:my-8 align-middle max-w-md w-screen/90 lg:right-16 md:max-w-lg'>
 					<div
 						id='modal-wrapper'
 						className='bg-oasisGradient-cambridgeBlue p-4 sm:p-6 sm:pb-4'>
@@ -123,29 +83,10 @@ const CardDetailComponent: React.FC<ICardDetail> = ({ id }) => {
 								id='modal-text'
 								className='mt-2 flex flex-row w-full justify-evenly'>
 								<button onClick={decrementCount}>
-									<svg
-										height='50px'
-										width='50px'
-										id='Capa_1'
-										viewBox='0 0 44.143 44.143'
-										fill='#000000'>
-										<g
-											id='SVGRepo_bgCarrier'
-											stroke-width='0'></g>
-										<g
-											id='SVGRepo_tracerCarrier'
-											stroke-linecap='round'
-											stroke-linejoin='round'></g>
-										<g id='SVGRepo_iconCarrier'>
-											<g>
-												<g>
-													<path
-														fill='#030104'
-														d='M34.738,21.073H9.404c-0.553,0-1,0.447-1,1s0.447,1,1,1h25.334c0.553,0,1-0.447,1-1 C35.738,21.519,35.291,21.073,34.738,21.073z'></path>
-												</g>
-											</g>
-										</g>
-									</svg>
+									<Image
+										className='w-10'
+										src={MinusIcon}
+										alt='MinusIcon'></Image>
 								</button>
 								<div>
 									<input
@@ -160,32 +101,17 @@ const CardDetailComponent: React.FC<ICardDetail> = ({ id }) => {
 									</p>
 								</div>
 								<button onClick={incrementCount}>
-									<svg
-										fill='#000000'
-										width='60px'
-										height='60px'
-										viewBox='-3.2 -3.2 38.40 38.40'
-										transform='rotate(0)'>
-										<g
-											id='SVGRepo_bgCarrier'
-											stroke-width='0'></g>
-										<g
-											id='SVGRepo_tracerCarrier'
-											stroke-linecap='round'
-											stroke-linejoin='round'
-											stroke='#CCCCCC'
-											stroke-width='0.8960000000000001'></g>
-										<g id='SVGRepo_iconCarrier'>
-											{' '}
-											<path d='M9,17h6v6a1,1,0,0,0,2,0V17h6a1,1,0,0,0,0-2H17V9a1,1,0,0,0-2,0v6H9a1,1,0,0,0,0,2Z'></path>{' '}
-										</g>
-									</svg>
+									<Image
+										className='w-10 h-10'
+										src={PlusIcon}
+										alt='PlusIcon'></Image>
 								</button>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+			<FooterComponent />
 		</>
 	);
 };

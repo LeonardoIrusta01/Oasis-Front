@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { useGetProductsQuery } from "../services/productsApi";
+import { useGetProductsQuery } from "../services/product/productsApi";
 
 export const productSlice = createSlice({
     name: "product",

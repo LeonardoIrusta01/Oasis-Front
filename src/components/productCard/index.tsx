@@ -25,21 +25,20 @@ const ProductCard: React.FC<IcardProps> = ({
 					<svg className='w-8 h-8 fill-current' viewBox='0 0 20 20'>
 						<path
 							d='M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z'
-							clip-rule='evenodd'
-							fill-rule='evenodd'></path>
+							clipRule='evenodd'
+							fillRule='evenodd'></path>
 					</svg>
 				</button>
 			</div>
 			<div className='mt-4'>
-				<a
-					className='justify-center mx-5 mt-3 flex overflow-hidden rounded-xl'
-					href='#'>
+				<div
+					className='justify-center mx-5 mt-3 flex overflow-hidden rounded-xl'>
 					<Image
 						className='object-cover'
 						src={image || defaultIcon}
 						alt='productImage'
 					/>
-				</a>
+				</div>
 				<div className='mt-3 px-3 pb-3'>
 					<div className='mt-2 mb-3 flex items-center'>
 						<p>
@@ -48,11 +47,11 @@ const ProductCard: React.FC<IcardProps> = ({
 							</span>
 						</p>
 					</div>
-					<a href='#'>
+					
 						<h5 className='text-xl tracking-tight text-slate-900'>
 							{name || 'Nombre'}
 						</h5>
-					</a>
+					
 				</div>
 			</div>
 		</>

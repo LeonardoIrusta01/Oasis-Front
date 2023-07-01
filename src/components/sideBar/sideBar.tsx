@@ -4,6 +4,7 @@ import { useAppDispatch } from '@/redux/hooks';
 import Image from 'next/image';
 import Log_Out_Icon from '../../assets/images/Log_Out_Icon.png';
 import React, { LegacyRef } from 'react';
+import axios from 'axios';
 
 const SideBar: React.FC<{ sideBarElement: LegacyRef<HTMLElement> }> = ({ sideBarElement }) => {
 	const dispatch = useAppDispatch();
