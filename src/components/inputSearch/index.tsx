@@ -5,12 +5,12 @@ import { IInputSearch } from "./interface"
 
 const InputSearch: React.FC<IInputSearch> = ({ label }) => {
     function handleChange(event: ChangeEvent<HTMLInputElement>): void {
-        // console.log('value de searchbar', event.target.value)
+        // do something
     }
 
     function handlePressEnter(event: any): void {
         if(event.keyCode === 13){
-            // console.log('este es el dato del evento', event.keyCode)
+            // do something
         }
     }
 
