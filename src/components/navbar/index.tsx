@@ -5,12 +5,10 @@ import Image from 'next/image';
 import userIcon from '../../assets/images/User_Icon.png';
 import cartIcon from '../../assets/images/Cart_Icon.png';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { useState } from 'react';
 import SideBar from '../sideBar/sideBar';
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { toggleSideBar } from '@/redux/features/sideBarSwitch';
 import Link from 'next/link';
-import { current } from '@reduxjs/toolkit';
 import PopUpUser from '../popUpUser/popUpUser';
 
 const Navbar = () => {
@@ -20,6 +18,7 @@ const Navbar = () => {
 	const [popUpUserShow, setpopUpUserShow] = useState(false);
 
 	const sideBarElement = useRef<HTMLDivElement>(null);
+	const menuRef = useRef<HTMLButtonElement>(null);
 	const popUpElement = useRef<HTMLDivElement>(null);
 	const imageRef = useRef<HTMLImageElement>(null);
 
@@ -45,35 +44,36 @@ const Navbar = () => {
 		const handleClickOutside = (event: MouseEvent) => {
 			if (
 				sideBarElement.current &&
-				!sideBarElement.current.contains(event.target as Node)
+				!sideBarElement.current.contains(event.target as Node) &&
+				!menuRef.current!.contains(event.target as Node)
 			) {
-				dispatch(toggleSideBar());
+				dispatch(toggleSideBar(true));
 			}
 		};
 		window.addEventListener('mousedown', handleClickOutside);
 		return () =>
 			window.removeEventListener('mousedown', handleClickOutside);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [sideBarElement]);
 
 	return (
 		<>
-			{!hidden && <SideBar sideBarElement={sideBarElement} />}
-			<div className='w-full h-1/10 bg-oasisGradient-seaGreen flex items-center px-2'>
-				<Menu />
+			<SideBar sideBarElement={sideBarElement} hidden={hidden} />
+			<div className='relative w-full h-1/10 bg-oasisGradient-seaGreen flex items-center space-x-3 pr-3 pl-9'>
+				<Menu menuRef={menuRef} />
 				<InputSearch label='prueba' />
-
 				<button onClick={handlePopUp}>
 					<Image
-					    ref={imageRef}
-						className='ml-3 w-6 h-6 text-oasisGradient-black'
+						ref={imageRef}
+						className='w-6 h-6 text-oasisGradient-black min-w-fit'
 						src={userIcon}
 						alt='logo'
 					/>
 				</button>
 				{popUpUserShow && <PopUpUser popUpElement={popUpElement} />}
-				<Link href={'/cart'}>
+				<Link href={'/cart'} className='flex justify-center'>
 					<Image
-						className='mx-3 w-6 h-6 text-oasisGradient-black'
+						className='w-6 h-6 text-oasisGradient-black min-w-fit'
 						src={cartIcon}
 						alt='logo'
 					/>

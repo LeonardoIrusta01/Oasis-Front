@@ -1,15 +1,12 @@
 "use client";
 import "./globals.css";
-import { Inter } from "next/font/google";
 import { StoreProvider } from "@/redux/provider";
 import { Auth0Provider } from "@auth0/auth0-react";
 import dotenv from "dotenv";
 dotenv.config();
 
-const inter = Inter({ subsets: ["latin"] });
-
-const domain = process.env.REACT_APP_AUTH0_DOMAIN;
-const client_id = process.env.CLIENT_ID;
+// const domain = process.env.REACT_APP_AUTH0_DOMAIN;
+// const client_id = process.env.CLIENT_ID;
 
 export const metadata = {
   title: "Create Next App",
@@ -23,10 +20,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <head>
+        <title>Oasis</title>
+      </head>
+      <body>
         <Auth0Provider
-          domain={"dev-oasis.us.auth0.com" || ""}
-          clientId={"gez6UzHetekBd1LomKU6g39OSME3yJSV" || ""}
+          domain="dev-oasis.us.auth0.com"
+          clientId="gez6UzHetekBd1LomKU6g39OSME3yJSV"
           authorizationParams={{redirect_uri: window.location.origin}}
         >
           <StoreProvider>{children}</StoreProvider>

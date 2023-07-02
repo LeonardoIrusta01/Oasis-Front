@@ -3,29 +3,22 @@ import { toggleSideBar } from '@/redux/features/sideBarSwitch';
 import { useAppDispatch } from '@/redux/hooks';
 import Image from 'next/image';
 import Log_Out_Icon from '../../assets/images/Log_Out_Icon.png';
-import React, { LegacyRef } from 'react';
-import axios from 'axios';
+import { ISideBar } from './interface'
 
-const SideBar: React.FC<{ sideBarElement: LegacyRef<HTMLElement> }> = ({ sideBarElement }) => {
+const SideBar: React.FC<ISideBar> = ({ sideBarElement, hidden }) => {
 	const dispatch = useAppDispatch();
 
 	const handleOnClick = () => {
-		dispatch(toggleSideBar());
+		dispatch(toggleSideBar(true));
 	};
 
 	return (
 		<>
-			<div className='fixed flex w-full z-10 h-full bg-gray-800 opacity-50'></div>
+			<div className={`${!hidden ? 'left-0' : '-left-screen'} flex fixed w-full z-10 h-full bg-gray-800/5 backdrop-blur-sm`}/>
 			<aside
+				style={{'transition': 'all 400ms ease-in-out'}}
 				ref={sideBarElement}
-				className='fixed overflow-y-auto space-y-6 z-20 bg-oasisGradient-cambridgeBlue top-0 left-0 w-80 h-screen transition-transform'>
-				<div className='flex p-[21.5px] items-center w-full text-2xl font-bold bg-oasisGradient-seaGreen text-oasisGradient-black'>
-					<button
-						onClick={handleOnClick}
-						className='w-12 h-12'>
-						X
-					</button>
-				</div>
+				className={`${!hidden ? 'left-0' : '-left-80'} fixed overflow-y-auto space-y-6 z-20 bg-oasisGradient-cambridgeBlue top-0 w-80 h-screen pt-20`}>
 				<ul className='space-y-6 px-3'>
 					<li>
 						<Link

@@ -4,38 +4,37 @@ import defaultIcon from '../../assets/images/Default_Food_Icon.png';
 import FooterComponent from '../footer';
 
 const AboutUs = () => {
-	return (
+  	return (
 		<>
-			<div className='h-full w-full md:h-screen md:w-screen bg-oasisGradient-antiFlashWhite overflow-hidden'>
+			<div className="h-full w-full md:h-screen md:w-screen bg-oasisGradient-antiFlashWhite">
 				<Navbar />
 				<p
-					className='w-full p-3 text-oasisGradient-black text-8 flex justify-center font-semibold'
-					style={{ textShadow: '0px 4px 4px rgba(0,0,0,0.25)' }}>
+					className="w-full p-3 text-oasisGradient-black text-8 flex justify-center font-semibold"
+					style={{ textShadow: "0px 4px 4px rgba(0,0,0,0.25)" }}
+				>
 					Sobre Nostros
 				</p>
 				<div>
-					<div className='flex flex-wrap p-4 justify-center items-center'>
-						<p className=' w-7/10 '>
-							Bienvenidos a Oasis almacén natural, nos dedicamos a
-							la venta de productos dietéticos y nutricionales
-							destinados a mejorar la salud y garantizar una
-							adecuada alimentación mediante productos compuestos
-							de una determinada manera para conseguir un objetivo
-							nutritivo o complementar la dieta normal de una
-							persona. En nuestro almacén natural vas a poder
-							encontrar gran diversidad de productos: veganos,
-							aptos para celiacos, frutos secos, harinas,
-							semillas, cereales, condimentos, jugos, fideos
-							integrales, dulces, mermeladas, legumbres y muchos
-							productos mas.
+					<div className="flex flex-wrap p-4 justify-center items-center">
+						<p className=" w-7/10 ">
+							Bienvenidos a Oasis almacén natural, nos dedicamos a la venta de
+							productos dietéticos y nutricionales destinados a mejorar la salud y
+							garantizar una adecuada alimentación mediante productos compuestos
+							de una determinada manera para conseguir un objetivo nutritivo o
+							complementar la dieta normal de una persona. En nuestro almacén
+							natural vas a poder encontrar gran diversidad de productos: veganos,
+							aptos para celiacos, frutos secos, harinas, semillas, cereales,
+							condimentos, jugos, fideos integrales, dulces, mermeladas, legumbres
+							y muchos productos mas.
 						</p>
 						<Image
+							placeholder="blur"
+							priority={false}
 							src={defaultIcon}
-							alt='default_Food_Icon'
-							className='w-52 h-52'
+							alt="default_Food_Icon"
+							className="w-52 h-52"
 						/>
 					</div>
-
 					<div className='flex flex-wrap p-4 justify-center items-center'>
 						<Image
 							src={defaultIcon}

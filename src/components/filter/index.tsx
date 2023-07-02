@@ -3,7 +3,7 @@ import defaultIcon from "../../assets/images/Default_Food_Icon.png";
 import { useGetCategoriesQuery } from "@/redux/services/category/categoryApi";
 import { useAppDispatch } from "@/redux/hooks";
 import { filterProducts } from "@/redux/features/productsReducer";
-import { Category } from "@/redux/services/category/categoryApi";
+import { ICategory } from "@/redux/services/category/inteface";
 import axios from "axios";
 import { useState } from "react";
 
@@ -37,10 +37,10 @@ const Filter = () => {
   return (
     <div className="flex overflow-x-scroll py-5">
       <div className="flex flex-nowrap">
-        {data?.payload.map((c: Category, i) => {
+        {data?.payload.map((c: ICategory, i) => {
           return (
-            <div key={i} className="inline-block px-3">
-              <button onClick={(e) => handleOnClick(e, c.name)}>
+            <div className="inline-block px-3" key={`category${c.name}`}>
+              <button onClick={(e) => handleOnClick(e, c.name)} >
                 <div
                   className={`w-28 h-28 max-w-xs overflow-hidden rounded-full bg-oasisGradient-antiFlashWhite flex justify-center items-center border-4 ${
                     active === c.name ? "border-x-oasisGradient-seaGreen" : ""

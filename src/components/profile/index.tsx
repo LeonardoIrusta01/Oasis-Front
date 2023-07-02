@@ -1,37 +1,11 @@
 import Navbar from '../navbar';
-import { useGetUserByIdQuery } from '@/redux/services/user/usersApi';
 import Image from 'next/image';
-import axios from 'axios';
 import userDefaultIcon from '../../assets/images/User_Icon.png';
 import Log_Out_Icon from '../../assets/images/Log_Out_Icon.png';
 import Edit_Icon from '../../assets/images/Edit_Icon.png';
 import FooterComponent from '../footer';
-import Cookies from 'universal-cookie';
 
 const ProfileComponent = () => {
-	const cookies = new Cookies();
-	const userId = cookies.get('userId');
-
-	const { data, isLoading, isError } = useGetUserByIdQuery(userId);
-
-	if (isLoading)
-		return (
-			<div className='relative h-screen'>
-				<Navbar />
-				<div className='bg-gray-200 w-full min-h-screen flex justify-center items-center'>
-					<div className='flex min-h-screen w-full items-center justify-center bg-gray-200'>
-						<div className='flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-tr from-oasisGradient-antiFlashWhite to-oasisGradient-seaGreen2 animate-spin'>
-							<div className='h-9 w-9 rounded-full bg-gray-200'></div>
-						</div>
-					</div>
-				</div>
-			</div>
-		);
-	if (isError) return <p>Error</p>;
-
-	const handleLogOut = async () => {
-		const res = (await axios('http://localhost:3001/api/auth/logout')).data;
-	};
 
 	return (
 		<>
@@ -49,19 +23,19 @@ const ProfileComponent = () => {
 						<li className='bg-oasisGradient-white h-14 pl-2 flex items-center rounded-md'>
 							<div>
 								<p className='opacity-50'>Nombre</p>
-								<p>{data?.payload?.firstName || ''}</p>
+								<p>{'name test'}</p>
 							</div>
 						</li>
 						<li className='bg-oasisGradient-white h-14 pl-2 flex items-center rounded-md'>
 							<div>
 								<p className='opacity-50'>Mail:</p>
-								<p>{data?.payload?.email || ''}</p>
+								<p>{'email test'}</p>
 							</div>
 						</li>
 						<li className='bg-oasisGradient-white h-14 pl-2 flex justify-between items-center rounded-md'>
 							<div>
 								<p className='opacity-50'>Teléfono:</p>
-								<p>{data?.payload?.cellphone || 0}</p>
+								<p>{351111111}</p>
 							</div>
 							<button className='w-8 h-8 p-1'>
 								<Image src={Edit_Icon} alt='' />
@@ -80,14 +54,13 @@ const ProfileComponent = () => {
 				</div>
 				<div className='flex justify-center w-full'>
 					<button
-						onClick={handleLogOut}
 						className='text-oasisGradient-white bg-oasisGradient-seaGreen2 relative -bottom-48 w-96 flex rounded-md flex-col justify-center md:justify-end lg:justify-end items-center py-2'>
 						<Image
 							src={Log_Out_Icon}
 							alt='logOutIcon'
 							className='w-16 h-14 flex justify-center'
 						/>
-						Log Out
+						Cerrar sesión
 					</button>
 				</div>
 			</div>

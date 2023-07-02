@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { IApiUsersResponse, IpostResponse, Iuser } from "./interface"
+import { IApiUsersResponse, IpostResponse } from "./interface"
 
 export const usersApi = createApi({
 	reducerPath: 'usersApi',
