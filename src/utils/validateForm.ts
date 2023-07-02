@@ -2,7 +2,7 @@ import * as Yup from 'yup';
 
 
 export const RegisterValidate = Yup.object().shape({
-    name: Yup.string().trim().required("El nombre es requerido"),
+    firstName: Yup.string().trim().required("El nombre es requerido"),
     lastName: Yup.string().trim().required("El apellido es requerido"),
     email: Yup.string().trim().required("El email es requerido"),
     cellphone: Yup.number().required("El numero de telefono es requerido").min(10000000, "El minimo debe ser 8 caracteres")/* .max(15, "El maximo debe ser 15 caracteres") */,

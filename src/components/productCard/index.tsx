@@ -30,7 +30,8 @@ const ProductCard: React.FC<IcardProps> = ({
 				</button>
 			</div>
 			<div className='mt-4'>
-				<div className='mt-justify-center mx-5 mt-3 flex overflow-hidden rounded-xl'>
+				<div
+					className='justify-center mx-5 mt-3 flex overflow-hidden rounded-xl'>
 					<Image
 						className='object-cover'
 						src={image || defaultIcon}
@@ -45,11 +46,9 @@ const ProductCard: React.FC<IcardProps> = ({
 							</span>
 						</p>
 					</div>
-					<div>
-						<h5 className='text-xl tracking-tight text-slate-900'>
-							{name || 'Nombre'}
-						</h5>
-					</div>
+					<h5 className='text-xl tracking-tight text-slate-900'>
+						{name || 'Nombre'}
+					</h5>
 				</div>
 			</div>
 		</>

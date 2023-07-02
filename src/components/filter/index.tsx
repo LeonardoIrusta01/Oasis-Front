@@ -1,9 +1,9 @@
 import Image from "next/image";
 import defaultIcon from "../../assets/images/Default_Food_Icon.png";
-import { useGetCategoriesQuery } from "@/redux/services/categoryApi";
+import { useGetCategoriesQuery } from "@/redux/services/category/categoryApi";
 import { useAppDispatch } from "@/redux/hooks";
 import { filterProducts } from "@/redux/features/productsReducer";
-import { Category } from "@/redux/services/categoryApi";
+import { ICategory } from "@/redux/services/category/inteface";
 import axios from "axios";
 import { useState } from "react";
 
@@ -35,9 +35,9 @@ const Filter = () => {
   };
 
   return (
-    <div className="flex overflow-x-scroll py-5 hide-scroll-bar">
+    <div className="flex overflow-x-scroll py-5">
       <div className="flex flex-nowrap">
-        {data?.payload.map((c: Category, i) => {
+        {data?.payload.map((c: ICategory, i) => {
           return (
             <div className="inline-block px-3" key={`category${c.name}`}>
               <button onClick={(e) => handleOnClick(e, c.name)} >
@@ -52,7 +52,7 @@ const Filter = () => {
                     className="w-16 h-16"
                   />
                 </div>
-                <p className="flex justify-center font-bold pt-2">{c.name.charAt(0).toUpperCase() + c.name.slice(1)}</p>
+                <p className="flex justify-center font-bold pt-2 capitalize">{c.name}</p>
               </button>
             </div>
           );
