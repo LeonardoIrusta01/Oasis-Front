@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { IApiUsersResponse, IpostResponse } from "./interface"
+import { IApiUsersResponse, IpostResponse, Iuser, IpostUserResponse, IApiUserResponse } from './interface';
 
 export const usersApi = createApi({
 	reducerPath: 'usersApi',
@@ -10,11 +10,26 @@ export const usersApi = createApi({
 		getUsers: builder.query<IApiUsersResponse, null>({
 			query: () => '/api/user',
 		}),
-		update: builder.mutation<IpostResponse, {id: string; post: FormData}>({
+		updateUsers: builder.mutation<
+			IpostResponse,
+			{ id: number; post: Iuser }
+		>({
 			query: ({ id, post }) => ({
 				url: `/api/user/${id}`,
-				method: 'PATCH',
+				method: 'PUT',
 				body: post,
+				headers: { 'Content-type': 'application/json; charset=UTF-8' },
+			}),
+		}),
+		getUserbyEmail: builder.query<IApiUserResponse, string | undefined>({
+			query: (email) => `/api/user?email=${email}`,
+		}),
+		postUser: builder.mutation<IpostUserResponse, Iuser>({
+			query: (post) => ({
+					url: '/api/user',
+					method: 'POST',
+					body: post,
+					headers: { 'Content-type': 'application/json; charset=UTF-8' },
 			}),
 		}),
 	}),
@@ -22,5 +37,7 @@ export const usersApi = createApi({
 
 export const {
 	useGetUsersQuery,
-	useUpdateMutation,
+	usePostUserMutation,
+	useUpdateUsersMutation,
+	useGetUserbyEmailQuery,
 } = usersApi;
