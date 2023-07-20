@@ -4,11 +4,22 @@ import { Ipreset } from './interface';
 
 const UploadImage: React.FC<Ipreset> = ({ preset, children, setUrl }) => {
 	const ALLOWED_TYPES = ['image/png', 'image/jpeg', 'image/jpg'];
-	const openChooseImage = () => {
-		document.getElementById('profileImage')?.click();
+	const openChooseImage = async () => {
+		const { value: file } = await Swal.fire({
+			title: 'Selecciona una imagen',
+			confirmButtonColor: '#1E5940',
+			input: 'file',
+			inputAttributes: {
+				'accept': 'image/*',
+				'aria-label': 'Sube tu imagen de perfil',
+			},
+		});
+		if (file) {
+			upload(file)
+		}
 	};
-	const upload = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const files = e.target.files![0];
+	const upload = (e: any) => {
+		const files = e;
 		if (files && ALLOWED_TYPES.includes(files.type)) {
 			const data = new FormData();
 			data.append('file', files);
@@ -37,12 +48,12 @@ const UploadImage: React.FC<Ipreset> = ({ preset, children, setUrl }) => {
 			<button className='z-50' onClick={openChooseImage}>
 				{children}
 			</button>
-			<input
+			{/* <input
 				hidden
 				id='profileImage'
 				type='file'
 				onChange={(e) => upload(e)}
-			/>
+			/> */}
 		</div>
 	);
 };

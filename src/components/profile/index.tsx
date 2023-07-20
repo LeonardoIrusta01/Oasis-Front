@@ -12,6 +12,7 @@ import UploadImage from '../uploadImage/uploadImage';
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
+import Swal from 'sweetalert2';
 
 const ProfileComponent = () => {
 	const { user } = useAuth0();
@@ -21,9 +22,31 @@ const ProfileComponent = () => {
 
 	useEffect(() => {
 		if (url) {
-			updateUsers({ id: 1, post: { image: url } });
+			updateUsers({ id: data?.payload.id!, post: { image: url } });
 		}
 	}, [url]);
+
+	const handleCellPhoneChange = async () => {
+		const { value: cellphone } = await Swal.fire({
+			title: 'Coloca tu nuevo número',
+			input: 'number',
+			showCancelButton: true,
+			confirmButtonText: 'Aceptar',
+			confirmButtonColor: '#1E5940',
+			showLoaderOnConfirm: true,
+		});
+		if (cellphone && cellphone.toString().length === 10) {
+			updateUsers({id: data?.payload.id!, post: { cellphone: cellphone }})
+		} else {
+			Swal.fire({
+				icon: 'error',
+				title: 'Algo salió mal!',
+				text: 'Número incorrecto',
+				position: 'top',
+				confirmButtonColor: '#1E5940',
+			});
+		}
+	};
 
 	return (
 		<>
@@ -32,24 +55,42 @@ const ProfileComponent = () => {
 					<div className='h-screen w-sreen bg-oasisGradient-antiFlashWhite'>
 						<Navbar />
 						<div className='w-full flex justify-center pt-10'>
-							<UploadImage
-								preset={'ml_productimage'}
-								setUrl={setUrl}>
+							{!data.payload.image!.includes(
+								'googleusercontent'
+							) ? (
+								<UploadImage
+									preset={'ml_userImage'}
+									setUrl={setUrl}>
+									<Image
+										className='w-48 h-48 rounded-full object-contain'
+										src={
+											data.payload.image ||
+											userDefaultIcon
+										}
+										alt='userImage'
+										width='192'
+										height='192'
+									/>
+								</UploadImage>
+							) : (
 								<Image
 									className='w-48 h-48 rounded-full'
 									src={data.payload.image || userDefaultIcon}
 									alt='userImage'
-									width="192"
-									height="192"
+									width='192'
+									height='192'
 								/>
-							</UploadImage>
+							)}
 						</div>
 						<div className='pt-10 flex justify-around'>
 							<ul className='space-y-5 w-96 md:w-2/5 lg:w-2/5'>
 								<li className='bg-oasisGradient-white h-14 pl-2 flex items-center rounded-md'>
 									<div>
 										<p className='opacity-50'>Nombre</p>
-										<p>{data.payload.firstName} {data.payload.lastName}</p>
+										<p>
+											{data.payload.firstName}{' '}
+											{data.payload.lastName}
+										</p>
 									</div>
 								</li>
 								<li className='bg-oasisGradient-white h-14 pl-2 flex items-center rounded-md'>
@@ -63,7 +104,9 @@ const ProfileComponent = () => {
 										<p className='opacity-50'>Teléfono:</p>
 										<p>{data.payload.cellphone}</p>
 									</div>
-									<button className='w-8 h-8 p-1'>
+									<button
+										onClick={handleCellPhoneChange}
+										className='w-8 h-8 p-1'>
 										<Image src={Edit_Icon} alt='' />
 									</button>
 								</li>
