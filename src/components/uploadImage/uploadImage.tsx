@@ -48,12 +48,6 @@ const UploadImage: React.FC<Ipreset> = ({ preset, children, setUrl }) => {
 			<button className='z-50' onClick={openChooseImage}>
 				{children}
 			</button>
-			{/* <input
-				hidden
-				id='profileImage'
-				type='file'
-				onChange={(e) => upload(e)}
-			/> */}
 		</div>
 	);
 };
