@@ -5,6 +5,7 @@ export interface Iuser {
 	image?: string;
 	cellphone?: number;
 	id?: number;
+	admin?: boolean
 }
 
 export interface IpostResponse {
