@@ -9,14 +9,14 @@ const PopUpUser: React.FC<{ popUpElement: LegacyRef<HTMLDivElement> }> = ({
   popUpElement,
 }) => {
   const { loginWithRedirect, isAuthenticated, logout } = useAuth0();
-  const { isAdmin } = useUserRole();
+  const { isAdmin, isUser } = useUserRole();
 
   return (
     <div
       className="absolute right-0 top-16 bg-oasisGradient-white text-base z-50 list-none divide-y rounded px-2 shadow my-4"
       ref={popUpElement}
     >
-      {!isAuthenticated ? (
+      {!isUser ? (
         <ul className="py-2" aria-labelledby="dropdown">
           <li>
             <button

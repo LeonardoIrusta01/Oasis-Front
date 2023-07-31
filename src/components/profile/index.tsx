@@ -13,13 +13,15 @@ import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import Swal from 'sweetalert2';
-import { number } from 'yup';
+import { useUserRole } from '@/hooks/useUserRole';
+import axios from 'axios';
 
 const ProfileComponent = () => {
-	const { user } = useAuth0();
-	const { data } = useGetUserbyEmailQuery(user?.email);
+	const { user, loginWithRedirect, logout } = useAuth0();
+	const { data, refetch } = useGetUserbyEmailQuery(user?.email);
 	const [updateUsers] = useUpdateUsersMutation();
 	const [url, setUrl] = useState('');
+	const { isUser } = useUserRole();
 
 	useEffect(() => {
 		if (url) {
@@ -70,6 +72,7 @@ const ProfileComponent = () => {
 						lastName: result.value?.lastname,
 					},
 				});
+				refetch();
 				Swal.fire({
 					position: 'center',
 					icon: 'success',
@@ -81,51 +84,107 @@ const ProfileComponent = () => {
 		});
 	};
 
-	const handleCellPhoneChange = async () => {
-		const { value: cellphone } = await Swal.fire({
+	const handleCellPhoneChange = () => {
+		Swal.fire({
 			title: 'Colocá tu nuevo número',
 			html: `<style>
 			input::-webkit-outer-spin-button,
 			input::-webkit-inner-spin-button {
-			  -webkit-appearance: none;
-			  margin: 0;
+				-webkit-appearance: none;
+				margin: 0;
 			}
 			input[type="number"] {
 			  -moz-appearance: textfield;
 			}
-		  </style> <input class="swal2-input" type="number"></input>`,
+		  </style> <input class="swal2-input" type="number" id="cellphone"></input>`,
 			inputPlaceholder: '',
 			showCancelButton: true,
 			confirmButtonText: 'Aceptar',
 			confirmButtonColor: '#1E5940',
 			showLoaderOnConfirm: true,
+			preConfirm: () => {
+				const nameElement = document.getElementById(
+					'cellphone'
+				) as HTMLInputElement | null;
+				const cellphone = Number(nameElement?.value);
+				if (cellphone && cellphone.toString().length === 10) {
+					return { cellphone: cellphone };
+				} else {
+					Swal.showValidationMessage(`Número incorrecto`);
+				}
+			},
+		}).then((result) => {
+			if (result.isConfirmed) {
+				updateUsers({
+					id: data?.payload.id!,
+					post: { cellphone: result?.value?.cellphone },
+				});
+				refetch();
+				Swal.fire({
+					position: 'center',
+					icon: 'success',
+					title: 'El número se modificó correctamente',
+					showConfirmButton: false,
+					timer: 1500,
+				});
+			}
 		});
-		if (cellphone && cellphone.toString().length === 10) {
-			updateUsers({
-				id: data?.payload.id!,
-				post: { cellphone: cellphone },
-			});
-			Swal.fire({
-				position: 'center',
-				icon: 'success',
-				title: 'El número se cambió correctamente',
-				showConfirmButton: false,
-				timer: 1500,
-			});
-		} else if (cellphone) {
-			Swal.fire({
-				icon: 'error',
-				title: 'Algo salió mal!',
-				text: 'Número incorrecto',
-				position: 'top',
-				confirmButtonColor: '#1E5940',
-			});
-		}
+	};
+
+	const passChangeOptions = {
+		method: 'POST',
+		url: 'https://dev-oasis.us.auth0.com/dbconnections/change_password',
+		headers: { 'content-type': 'application/json' },
+		data: {
+			client_id: 'gez6UzHetekBd1LomKU6g39OSME3yJSV',
+			email: user?.email,
+			connection: 'Username-Password-Authentication',
+		},
+	};
+
+	const handlePasswordChange = () => {
+		Swal.fire({
+			title: 'Solicitar cambio de contraseña',
+			text: 'Haga click en aceptar para confirmar el envío de mail para cambiar su contraseña',
+			showCancelButton: true,
+			confirmButtonText: 'Aceptar',
+			confirmButtonColor: '#1E5940',
+			showLoaderOnConfirm: true,
+		}).then(async (result) => {
+			if (result.isConfirmed) {
+				await axios.post(
+					'https://dev-oasis.us.auth0.com/dbconnections/change_password',
+					{
+						client_id: 'gez6UzHetekBd1LomKU6g39OSME3yJSV',
+						email: user?.email,
+						connection: 'Username-Password-Authentication',
+					},
+					{ headers: { 'content-type': 'application/json' } }
+				);
+				logout();
+				window.location.reload();
+				Swal.fire({
+					position: 'center',
+					icon: 'success',
+					title: 'El mail se envío correctamente',
+					showConfirmButton: false,
+					timer: 1500,
+				});
+			} else if (!result) {
+				Swal.fire({
+					position: 'center',
+					icon: 'error',
+					title: 'Ups... Algo salió mal',
+					showConfirmButton: false,
+					timer: 1500,
+				});
+			}
+		});
 	};
 
 	return (
 		<>
-			{data ? (
+			{data && isUser ? (
 				<>
 					<div className='h-screen w-sreen bg-oasisGradient-antiFlashWhite'>
 						<Navbar />
@@ -195,7 +254,9 @@ const ProfileComponent = () => {
 										<p className='opacity-50'>Contraseña</p>
 										<p>**********</p>
 									</div>
-									<button className='w-8 h-8 p-1'>
+									<button
+										onClick={handlePasswordChange}
+										className='w-8 h-8 p-1'>
 										<Image src={Edit_Icon} alt='' />
 									</button>
 								</li>
@@ -214,7 +275,19 @@ const ProfileComponent = () => {
 					</div>
 					<FooterComponent />
 				</>
-			) : null}
+			) : (
+				<div>
+					<p>
+						No existe una sesión iniciada, por favor inicia sesión o
+						registrese haciendo click{' '}
+						<button
+							className='hover:text-blue-500 font-bold text underline'
+							onClick={() => loginWithRedirect()}>
+							aqui
+						</button>
+					</p>
+				</div>
+			)}
 		</>
 	);
 };
