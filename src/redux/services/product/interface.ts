@@ -18,7 +18,7 @@ export interface IProduct {
 
 export interface IApiProductsResponse {
 	status: string;
-	payload: IProduct[] | string;
+	payload: IProduct[];
 }
 
 export interface IApiProductResponseById {
