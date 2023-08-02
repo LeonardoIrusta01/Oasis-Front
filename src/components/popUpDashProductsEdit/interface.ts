@@ -1,5 +1,3 @@
-import { LegacyRef } from 'react';
-
 export interface IPopUpEditProps {
 	setIsShown: any;
 	productName: string
