@@ -1,14 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { useGetProductsQuery } from "../services/product/productsApi";
 
 export const productSlice = createSlice({
     name: "product",
     initialState: {
-        products: []
+        products: [],
+        currentPage: 1
     },
     reducers: {
-        getProducts: (state: any, action) => {
-            state.products = action.payload ? [...action.payload, ...(state?.products || [])] : action.payload
+        getProducts: (state, action) => {
+            state.products = action.payload.product ? [...action.payload.product, ...(state?.products || [])] : action?.payload?.product
+            state.currentPage = action.payload.page
         },
         filterProducts: (state, action) => {
             state.products = action.payload

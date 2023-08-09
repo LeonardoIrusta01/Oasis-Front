@@ -1,3 +1,3 @@
 export interface IInputSearch {
-    label: string
+    label?: string
 }

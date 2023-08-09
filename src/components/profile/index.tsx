@@ -1,4 +1,3 @@
-import Navbar from '../navbar';
 import Image from 'next/image';
 import userDefaultIcon from '../../assets/images/User_Icon.png';
 import Log_Out_Icon from '../../assets/images/Log_Out_Icon.png';

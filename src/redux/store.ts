@@ -5,6 +5,7 @@ import { setupListeners } from '@reduxjs/toolkit/dist/query';
 import toggleSideBar from './features/sideBarSwitch';
 import { productSlice } from './features/productsReducer';
 import { categoryApi } from './services/category/categoryApi';
+import { searchSlice } from './features/searchbar'
 
 export const store = configureStore({
 	reducer: {
@@ -12,7 +13,8 @@ export const store = configureStore({
 		[usersApi.reducerPath]: usersApi.reducer,
 		[categoryApi.reducerPath]: categoryApi.reducer,
 		toggleSideBarReducer: toggleSideBar,
-		productReducer: productSlice.reducer
+		productReducer: productSlice.reducer,
+		searchBarStateDispatch: searchSlice.reducer
 	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware().concat(productsApi.middleware, usersApi.middleware, categoryApi.middleware),

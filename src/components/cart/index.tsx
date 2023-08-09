@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import default_food_icon from '../../assets/images/Default_Food_Icon.png';
-import Navbar from '../navbar';
 import FooterComponent from '../footer';
 
 const CartComponent = () => {
@@ -8,7 +7,6 @@ const CartComponent = () => {
 
 	return (
 		<>
-			<Navbar />
 			<div className='flex flex-col bg-oasisGradient-antiFlashWhite h-screen overflow-hidden px-4'>
 				<h1
 					className='p-4 flex justify-center font-bold text-4xl'

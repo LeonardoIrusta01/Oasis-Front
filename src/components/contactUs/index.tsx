@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import Navbar from '../navbar';
 import facebookLogo from '../../assets/images/Facebook_Logo.png';
 import instagramLogo from '../../assets/images/Instagram_Logo_Black.png';
 import whatsappLogo from '../../assets/images/WhatsApp_Logo.png';
@@ -50,7 +49,6 @@ const ContactMe = () => {
 	return (
 		<>
 			<div className='h-screen w-sreen bg-oasisGradient-antiFlashWhite'>
-				<Navbar />
 
 				<p
 					className='w-100% p-3 text-oasisGradient-black text-8 flex justify-center font-semibold'

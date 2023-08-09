@@ -1,4 +1,3 @@
-import Navbar from '../navbar';
 import { useState } from 'react';
 import arrow from '../../assets/svg/Arrow Button.svg';
 import Image from 'next/image';
@@ -10,7 +9,6 @@ const Faqs = () => {
 	return (
 		<>
 			<div className='h-screen w-sreen bg-oasisGradient-antiFlashWhite'>
-				<Navbar />
 
 				<p
 					className='w-full p-3 text-oasisGradient-black text-8 text-center flex justify-center font-semibold'
