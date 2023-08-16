@@ -1,10 +1,8 @@
 import Image from 'next/image';
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import defaultIcon from '../../assets/images/Default_Food_Icon.png';
 import Link from 'next/link';
 import { useGetProductsByIdQuery } from '@/redux/services/product/productsApi';
-import Navbar from '../navbar';
 import FooterComponent from '../footer';
 import MinusIcon from '../../assets/svg/Minus Icon.svg';
 import PlusIcon from '../../assets/svg/Plus Icon.svg';
@@ -31,7 +29,6 @@ const CardDetailComponent: React.FC<ICardDetail> = ({ id }) => {
 	if (isLoading)
 		return (
 			<div className='relative h-screen'>
-				<Navbar />
 				<div className='bg-gray-200 w-full min-h-screen flex justify-center items-center'>
 					<div className='flex min-h-screen w-full items-center justify-center bg-gray-200'>
 						<div className='flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-tr from-oasisGradient-antiFlashWhite to-oasisGradient-seaGreen2 animate-spin'>
@@ -45,7 +42,6 @@ const CardDetailComponent: React.FC<ICardDetail> = ({ id }) => {
 
 	return (
 		<>
-			<Navbar />
 			<div className='w-full flex justify-center flex-col bg-oasisGradient-antiFlashWhite h-screen md:flex-row lg:flex-row'>
 				<div className='w-full bg-oasisGradient-white md:w-14 lg:w-14'>
 					<Link href={'/'} className='flex w-14'>

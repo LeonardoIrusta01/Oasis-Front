@@ -18,7 +18,11 @@ export interface IProduct {
 
 export interface IApiProductsResponse {
 	status: string;
-	payload: IProduct[];
+	payload: {
+		product: IProduct[] | string
+		page: number
+		totalPages: number
+	}
 }
 
 export interface IApiProductResponseById {

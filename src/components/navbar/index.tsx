@@ -10,8 +10,10 @@ import { useRef, useEffect, useState } from 'react';
 import { toggleSideBar } from '@/redux/features/sideBarSwitch';
 import Link from 'next/link';
 import PopUpUser from '../popUpUser/popUpUser';
+import { INavbar } from './interface';
 
-const Navbar = () => {
+
+const Navbar: React.FC<INavbar> = ({ input }) => {
 	const dispatch = useAppDispatch();
 	const hidden = useAppSelector((state) => state.toggleSideBarReducer.hidden);
 
@@ -59,9 +61,9 @@ const Navbar = () => {
 	return (
 		<>
 			<SideBar sideBarElement={sideBarElement} hidden={hidden} />
-			<div className='relative w-full h-1/10 bg-oasisGradient-seaGreen flex items-center space-x-3 pr-3 pl-9'>
+			<div className='relative w-full h-1/10  bg-oasisGradient-seaGreen flex items-center space-x-3 py-4 pr-3 pl-9'>
 				<Menu menuRef={menuRef} />
-				<InputSearch label='prueba' />
+				<InputSearch />
 				<button onClick={handlePopUp}>
 					<Image
 						ref={imageRef}

@@ -63,6 +63,12 @@ module.exports = {
       maxWidth: {
         "52.5":"210px"
       },
+      minHeight: {
+        "4":"16px",
+        "8":"32px",
+        "12":"48px",
+        "16":"64px"
+      },
       animation: {
         "slide-top": "slide-top 0.7s ease-in-out both",
         "in-out-sidebar": 'all .7s linear '
