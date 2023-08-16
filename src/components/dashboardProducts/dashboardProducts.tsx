@@ -10,6 +10,7 @@ import { useGetProductsQuery } from '@/redux/services/product/productsApi';
 import PopUpDashProductsEdit from '../popUpDashProductsEdit/popUpDashProductsEdit';
 import { IProduct } from '@/redux/services/product/interface';
 import axios from 'axios';
+import { useUserRole } from '@/hooks/useUserRole';
 
 const DashboardProductsComponent = () => {
 	const [page, setPage] = useState<number>(1);
@@ -21,13 +22,15 @@ const DashboardProductsComponent = () => {
 		useGetProductsQuery(`limit=30&page=${page}`);
 	const containerRef = useRef<HTMLDivElement>(null);
 	const [productIsActive, setProductIsActive] = useState<boolean>(false);
+	const { isAdmin } = useUserRole();
+
 	const handlePopUpEdit = (productId: number) => {
 		setSelectedProductId(productId);
 		setIsShown(!isShown);
 	};
 
 	const handleProductActive = async (id: number, active: boolean) => {
-		setProductIsActive(active)
+		setProductIsActive(active);
 		if (productIsActive) {
 			setProductIsActive(false);
 			Swal.fire({
@@ -94,7 +97,7 @@ const DashboardProductsComponent = () => {
 		);
 	if (isError) return <p>Error</p>;
 
-	return (
+	return isAdmin ? (
 		<>
 			<div ref={containerRef} className='h-screen overflow-y-auto'>
 				<Navbar />
@@ -153,7 +156,10 @@ const DashboardProductsComponent = () => {
 											<button
 												type='button'
 												onClick={() =>
-													handleProductActive(e.id, e.active)
+													handleProductActive(
+														e.id,
+														e.active
+													)
 												}>
 												{e.active === false ? (
 													<Image
@@ -210,7 +216,9 @@ const DashboardProductsComponent = () => {
 			</div>
 			<FooterComponent />
 		</>
-	);
+	):(
+		<p> No eres administrador... </p>
+	)
 };
 
 export default DashboardProductsComponent;

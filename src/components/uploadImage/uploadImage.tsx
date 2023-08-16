@@ -8,7 +8,7 @@ const UploadImage: React.FC<Ipreset> = ({
 	children,
 	setUrl,
 }) => {
-	const ALLOWED_TYPES = ['image/png', 'image/jpeg', 'image/jpg'];
+	const ALLOWED_TYPES = ['image/png', 'image/jpeg', 'image/jpg', 'image/webp'];
 
 	const openChooseImage = async () => {
 		const { value: file } = await Swal.fire({
